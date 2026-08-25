@@ -1,0 +1,16 @@
+{% assign giveaway_title = include.title | default: "Giveaway" %}
+{% assign giveaway_prize = include.prize | default: "Waterproof inspection notebook + marker kit" %}
+{% assign giveaway_deadline = include.deadline | default: "Ends this Friday" %}
+{% assign giveaway_cta_text = include.cta_text | default: "Enter giveaway" %}
+{% assign giveaway_cta_url = include.cta_url | default: "#" %}
+
+<section class="feature-widget giveaway-widget" aria-label="Giveaway">
+    <div class="widget-head">
+        <p class="eyebrow"><i class="lni lni-gift"></i> {{ giveaway_title }}</p>
+    </div>
+
+    <p class="giveaway-prize">{{ giveaway_prize }}</p>
+    <p class="widget-meta">{{ giveaway_deadline }}</p>
+
+    <a class="btn btn-accent btn-sm" href="{{ giveaway_cta_url }}">{{ giveaway_cta_text }}</a>
+</section>

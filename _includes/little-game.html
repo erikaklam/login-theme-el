@@ -1,0 +1,53 @@
+{% assign game_prompt = include.prompt | default: "Pick the hidden safe-pressure value" %}
+{% assign game_answer = include.answer | default: 3 %}
+
+<section class="feature-widget game-widget" aria-label="Little game">
+    <div class="widget-head">
+        <p class="eyebrow"><i class="lni lni-game"></i> Little game</p>
+        <p class="widget-subtitle">{{ game_prompt }}</p>
+    </div>
+
+    <div class="widget-game" data-answer="{{ game_answer }}">
+        <div class="game-options" role="group" aria-label="Pick a number">
+            {% for pick in (1..5) %}
+            <button type="button" class="btn btn-sm btn-outline-accent" data-pick="{{ pick }}">{{ pick }}</button>
+            {% endfor %}
+        </div>
+        <p class="game-result" aria-live="polite">Choose a number from 1 to 5.</p>
+    </div>
+</section>
+
+<script>
+    (function () {
+        var script = document.currentScript;
+        if (!script) return;
+
+        var root = script.previousElementSibling;
+        if (!root) return;
+
+        var game = root.querySelector('.widget-game');
+        if (!game) return;
+
+        var answer = Number(game.getAttribute('data-answer'));
+        var result = game.querySelector('.game-result');
+        var buttons = game.querySelectorAll('[data-pick]');
+
+        buttons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var pick = Number(button.getAttribute('data-pick'));
+                if (!result) return;
+
+                if (pick === answer) {
+                    result.textContent = 'Correct. Pressure is steady and cleanup can continue.';
+                    result.classList.add('is-win');
+                    result.classList.remove('is-lose');
+                    return;
+                }
+
+                result.textContent = 'Not quite. Try another value.';
+                result.classList.add('is-lose');
+                result.classList.remove('is-win');
+            });
+        });
+    })();
+</script>

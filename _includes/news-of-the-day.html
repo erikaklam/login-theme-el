@@ -1,0 +1,29 @@
+{% assign news_title = include.title | default: "News of the day" %}
+{% assign news_items = include.items %}
+
+<section class="feature-widget news-widget" aria-label="News of the day">
+    <div class="widget-head">
+        <p class="eyebrow"><i class="lni lni-popup"></i> {{ news_title }}</p>
+    </div>
+
+    <ul class="news-list">
+        {% if news_items and news_items.size > 0 %}
+        {% for item in news_items %}
+        <li>
+            {% if item.url %}
+            <a href="{{ item.url }}">{{ item.title }}</a>
+            {% else %}
+            <span>{{ item.title }}</span>
+            {% endif %}
+            {% if item.time %}
+            <time>{{ item.time }}</time>
+            {% endif %}
+        </li>
+        {% endfor %}
+        {% else %}
+        <li><span>Harbor team completed low-impact algae clearing in the east basin.</span><time>08:30</time></li>
+        <li><span>Two century cannons scheduled for photo survey before next tide.</span><time>11:10</time></li>
+        <li><span>Volunteer diver orientation opens tonight for weekend support.</span><time>17:45</time></li>
+        {% endif %}
+    </ul>
+</section>

@@ -1,0 +1,16 @@
+{% assign quote_text = include.quote | default: "Clean metal lasts longer than heroic scrubbing." %}
+{% assign quote_author = include.author | default: "Dockside Manual" %}
+{% assign quote_source = include.source | default: "Daily field reminder" %}
+
+<section class="feature-widget quote-widget" aria-label="Quote of the day">
+    <div class="widget-head">
+        <p class="eyebrow"><i class="lni lni-quotation-1"></i> Quote of the day</p>
+    </div>
+    <blockquote>
+        <p>"{{ quote_text }}"</p>
+    </blockquote>
+    <p class="widget-meta">
+        <strong>{{ quote_author }}</strong>
+        <span>{{ quote_source }}</span>
+    </p>
+</section>
